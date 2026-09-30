@@ -3,7 +3,7 @@
 **Descrição:** 
 Projeto prático desenvolvido em linguagem C para o gerenciamento de produtos de uma loja. O sistema utiliza manipulação de arquivos texto (`.csv`), structs e funções para realizar operações de cadastro, listagem, buscas (por nome, categoria e faixa de preço), atualização e remoção de produtos, garantindo a persistência dos dados.
 
-**Turma:** [Nome ou código da sua turma]
+**Turma:** Grupo 11
 
 **Integrantes do Grupo:**
 1. Higor Aparecido da Silva Santos
