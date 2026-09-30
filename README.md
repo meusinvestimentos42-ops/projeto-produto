@@ -1,17 +1,21 @@
-# Sistema de Cadastro de Produtos
+# 📚 Sistema de Gestão de Livraria
 
-**Descrição:** 
-Projeto prático desenvolvido em linguagem C para o gerenciamento de produtos de uma loja. O sistema utiliza manipulação de arquivos texto (`.csv`), structs e funções para realizar operações de cadastro, listagem, buscas (por nome, categoria e faixa de preço), atualização e remoção de produtos, garantindo a persistência dos dados.
+**Descrição:**  
+Este projeto prático consiste em um sistema desenvolvido em linguagem C para o gerenciamento e controle de estoque de uma livraria. O programa utiliza conceitos avançados de estruturas de dados (`struct`), manipulação de arquivos de texto em formato tabular (`.csv`), modularização por meio de funções e tratamento rigoroso de validações de entrada. O sistema garante a persistência dos dados, permitindo manter o histórico de livros cadastrados mesmo após o encerramento da execução.
 
-**Turma:** Grupo 11
+**Turma:** Ads / Ciência da Computação - Grupo 11  
 
-**Integrantes do Grupo:**
-1. Higor Aparecido da Silva Santos
-2. Isabella de Almeida Santos
-3. Edgard Aparecido
-4. Lucas Rodrigues de Lima Chaves
+**Integrantes do Grupo:**  
+1. Higor Aparecido da Silva Santos  
+2. Isabella de Almeida Santos  
+3. Edgard Aparecido  
+4. Lucas Rodrigues de Lima Chaves  
 5. José Bettuz
    
+
+---
+
+## 🛠️ Funcionalidades do Sistema
 
 ---
 
