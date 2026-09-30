@@ -12,7 +12,7 @@ typedef struct {
     int codigo;
 } Produto;
 
-// Declaração das funções
+// DeclaraÃ§Ã£o das funÃ§Ãµes
 void cadastrar();
 void listar();
 void buscarPorNome();
@@ -32,7 +32,7 @@ int main() {
         printf("2 - Listar produtos\n");
         printf("3 - Buscar produto por nome\n");
         printf("4 - Buscar produtos por categoria\n");
-        printf("5 - Buscar produtos por faixa de preços\n");
+        printf("5 - Buscar produtos por faixa de preÃ§os\n");
         printf("6 - Remover produto\n");
         printf("7 - Atualizar produto\n");
         printf("0 - Sair\n");
@@ -57,12 +57,12 @@ int main() {
 }
 
 // ==========================
-// Implementações das funções
+// ImplementaÃ§Ãµes das funÃ§Ãµes
 // ==========================
 
 void cadastrar() {
     Produto p;
-    FILE *f = fopen(ARQUIVO, "a"); // abre em modo append (não apaga os existentes)
+    FILE *f = fopen(produtos.csv, "a"); // abre em modo append (nÃ£o apaga os existentes)
     if (f == NULL) {
         perror("Erro ao abrir o arquivo");
         return;
@@ -98,7 +98,7 @@ void cadastrar() {
 
 
 void listar() {
-    FILE *f = fopen(ARQUIVO, "r");
+    FILE *f = fopen(produtos.csv, "r");
     if (f == NULL) {
         printf("Nenhum produto cadastrado.\n");
         return;
@@ -133,9 +133,9 @@ void listar() {
 
 
 void buscarPorNome() {
-    FILE *f = fopen(ARQUIVO, "r");
+    FILE *f = fopen(produtos.csv, "r");
     if (f == NULL) {
-        printf("A agenda de produtos está vazia.\n");
+        printf("A agenda de produtos estÃ¡ vazia.\n");
         return;
     }
 
@@ -164,7 +164,7 @@ void buscarPorNome() {
             printf("Preco: R$ %.2f\n", p.preco);
             printf("Quantidade: %d\n", p.quantidade);
             printf("Codigo: %d\n", p.codigo);
-            break; // já encontrou, pode parar
+            break; // jÃ¡ encontrou, pode parar
         }
     }
 
@@ -178,7 +178,7 @@ void buscarPorNome() {
 
 
 void buscarPorCategoria() {
-    FILE *f = fopen(ARQUIVO, "r");
+    FILE *f = fopen(produtos.csv, "r");
     if (f == NULL) {
         printf("Nenhum produto cadastrado.\n");
         return;
@@ -225,7 +225,7 @@ void buscarPorCategoria() {
 
 
 void buscarPorPreco() {
-    FILE *f = fopen(ARQUIVO, "r");
+    FILE *f = fopen(produtos.csv, "r");
     if (f == NULL) {
         printf("Nenhum produto cadastrado.\n");
         return;
@@ -253,7 +253,7 @@ void buscarPorPreco() {
         p.quantidade = atoi(strtok(NULL, ";"));
         p.codigo = atoi(strtok(NULL, ";\n"));
 
-        // verifica se o preço está dentro da faixa
+        // verifica se o preÃ§o estÃ¡ dentro da faixa
         if (p.preco >= precoMin && p.preco <= precoMax) {
             encontrou = 1;
             contador++;
@@ -281,7 +281,7 @@ void buscarPorPreco() {
 }
 
 void remover() {
-    FILE *f = fopen(ARQUIVO, "r");
+    FILE *f = fopen(produtos.csv, "r");
     FILE *temp = fopen("temp.csv", "w");
 
     Produto p;
@@ -311,10 +311,10 @@ void remover() {
         p.quantidade = atoi(strtok(NULL, ";"));
         p.codigo = atoi(strtok(NULL, ";\n"));
 
-        // verifica se é o produto a remover
+        // verifica se Ã© o produto a remover
         if (strcmp(p.nome, nomeBusca) == 0) {
             encontrou = 1;
-            // não escreve no arquivo temporário ? produto removido
+            // nÃ£o escreve no arquivo temporÃ¡rio ? produto removido
         } else {
             fprintf(temp, "%s;%s;%.2f;%d;%d\n",
                     p.nome, p.categoria, p.preco, p.quantidade, p.codigo);
@@ -324,8 +324,8 @@ void remover() {
     fclose(f);
     fclose(temp);
 
-    // substitui o arquivo original pelo temporário
-    remove(ARQUIVO);
+    // substitui o arquivo original pelo temporÃ¡rio
+    remove(produtos.csv);
     rename("temp.csv", ARQUIVO);
 
     if (encontrou) {
@@ -338,7 +338,7 @@ void remover() {
 
 
 void atualizar() {
-    FILE *f = fopen(ARQUIVO, "r");
+    FILE *f = fopen(produtos.csv, "r");
     FILE *temp = fopen("temp.csv", "w");
 
     Produto p;
@@ -388,7 +388,7 @@ void atualizar() {
             scanf("%d", &p.codigo);
         }
 
-        // grava no arquivo temporário (se atualizado, grava os novos dados)
+        // grava no arquivo temporÃ¡rio (se atualizado, grava os novos dados)
         fprintf(temp, "%s;%s;%.2f;%d;%d\n",
                 p.nome, p.categoria, p.preco, p.quantidade, p.codigo);
     }
@@ -396,8 +396,8 @@ void atualizar() {
     fclose(f);
     fclose(temp);
 
-    // substitui o arquivo original pelo temporário
-    remove(ARQUIVO);
+    // substitui o arquivo original pelo temporÃ¡rio
+    remove(produtos.csv);
     rename("temp.csv", ARQUIVO);
 
     if (encontrou) {
@@ -406,4 +406,3 @@ void atualizar() {
         printf("Produto nao encontrado.\n");
     }
 }
-
