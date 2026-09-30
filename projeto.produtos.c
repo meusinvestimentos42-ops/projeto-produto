@@ -62,7 +62,7 @@ int main() {
 
 void cadastrar() {
     Produto p;
-    FILE *f = fopen(produtos.csv, "a"); // abre em modo append (não apaga os existentes)
+    FILE *f = fopen(ARQUIVO, "a"); // abre em modo append (não apaga os existentes)
     if (f == NULL) {
         perror("Erro ao abrir o arquivo");
         return;
@@ -98,7 +98,7 @@ void cadastrar() {
 
 
 void listar() {
-    FILE *f = fopen(produtos.csv, "r");
+    FILE *f = fopen(ARQUIVO, "r");
     if (f == NULL) {
         printf("Nenhum produto cadastrado.\n");
         return;
@@ -133,7 +133,7 @@ void listar() {
 
 
 void buscarPorNome() {
-    FILE *f = fopen(produtos.csv, "r");
+    FILE *f = fopen(ARQUIVO, "r");
     if (f == NULL) {
         printf("A agenda de produtos está vazia.\n");
         return;
@@ -178,7 +178,7 @@ void buscarPorNome() {
 
 
 void buscarPorCategoria() {
-    FILE *f = fopen(produtos.csv, "r");
+    FILE *f = fopen(ARQUIVO, "r");
     if (f == NULL) {
         printf("Nenhum produto cadastrado.\n");
         return;
@@ -225,7 +225,7 @@ void buscarPorCategoria() {
 
 
 void buscarPorPreco() {
-    FILE *f = fopen(produtos.csv, "r");
+    FILE *f = fopen(ARQUIVO, "r");
     if (f == NULL) {
         printf("Nenhum produto cadastrado.\n");
         return;
@@ -281,7 +281,7 @@ void buscarPorPreco() {
 }
 
 void remover() {
-    FILE *f = fopen(produtos.csv, "r");
+    FILE *f = fopen(ARQUIVO, "r");
     FILE *temp = fopen("temp.csv", "w");
 
     Produto p;
@@ -325,7 +325,7 @@ void remover() {
     fclose(temp);
 
     // substitui o arquivo original pelo temporário
-    remove(produtos.csv);
+    remove(ARQUIVO);
     rename("temp.csv", ARQUIVO);
 
     if (encontrou) {
@@ -338,7 +338,7 @@ void remover() {
 
 
 void atualizar() {
-    FILE *f = fopen(produtos.csv, "r");
+    FILE *f = fopen(ARQUIVO, "r");
     FILE *temp = fopen("temp.csv", "w");
 
     Produto p;
@@ -397,7 +397,7 @@ void atualizar() {
     fclose(temp);
 
     // substitui o arquivo original pelo temporário
-    remove(produtos.csv);
+    remove(ARQUIVO);
     rename("temp.csv", ARQUIVO);
 
     if (encontrou) {
