@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define ARQUIVO "produtos.csv"
+#define ARQUIVO "acervo_livraria.csv"
 
 typedef struct {
     char nome[100];
@@ -32,7 +32,7 @@ int main() {
         printf("2 - Listar produtos\n");
         printf("3 - Buscar produto por nome\n");
         printf("4 - Buscar produtos por categoria\n");
-        printf("5 - Buscar produtos por faixa de preços\n");
+        printf("5 - Buscar produtos por faixa de preÃ§os\n");
         printf("6 - Remover produto\n");
         printf("7 - Atualizar produto\n");
         printf("0 - Sair\n");
@@ -57,12 +57,12 @@ int main() {
 }
 
 // ==========================
-// Implementações das funções
+// Implementação das funções
 // ==========================
 
 void cadastrar() {
     Produto p;
-    FILE *f = fopen(ARQUIVO, "a"); // abre em modo append (não apaga os existentes)
+    FILE *f = fopen(ARQUIVO, "a"); // abre em modo append (nâo apaga os existentes)
     if (f == NULL) {
         perror("Erro ao abrir o arquivo");
         return;
@@ -95,7 +95,6 @@ void cadastrar() {
     fclose(f);
     printf("Produto cadastrado com sucesso!\n");
 }
-
 
 void listar() {
     FILE *f = fopen(ARQUIVO, "r");
@@ -130,8 +129,6 @@ void listar() {
     fclose(f);
 }
 
-
-
 void buscarPorNome() {
     FILE *f = fopen(ARQUIVO, "r");
     if (f == NULL) {
@@ -164,7 +161,7 @@ void buscarPorNome() {
             printf("Preco: R$ %.2f\n", p.preco);
             printf("Quantidade: %d\n", p.quantidade);
             printf("Codigo: %d\n", p.codigo);
-            break; // já encontrou, pode parar
+            break; // já¡ encontrou, pode parar
         }
     }
 
@@ -174,8 +171,6 @@ void buscarPorNome() {
         printf("Produto nao encontrado.\n");
     }
 }
-
-
 
 void buscarPorCategoria() {
     FILE *f = fopen(ARQUIVO, "r");
@@ -223,7 +218,6 @@ void buscarPorCategoria() {
     }
 }
 
-
 void buscarPorPreco() {
     FILE *f = fopen(ARQUIVO, "r");
     if (f == NULL) {
@@ -253,7 +247,7 @@ void buscarPorPreco() {
         p.quantidade = atoi(strtok(NULL, ";"));
         p.codigo = atoi(strtok(NULL, ";\n"));
 
-        // verifica se o preço está dentro da faixa
+        // verifica se o preço está¡ dentro da faixa
         if (p.preco >= precoMin && p.preco <= precoMax) {
             encontrou = 1;
             contador++;
@@ -264,12 +258,6 @@ void buscarPorPreco() {
             printf("Quantidade: %d\n", p.quantidade);
             printf("Codigo: %d\n", p.codigo);
         }
-    }
-
-    fclose(f);
-
-    if (!encontrou) {
-        printf("Nenhum produto encontrado nesta faixa de preco.\n");
     }
     
 
@@ -311,10 +299,10 @@ void remover() {
         p.quantidade = atoi(strtok(NULL, ";"));
         p.codigo = atoi(strtok(NULL, ";\n"));
 
-        // verifica se é o produto a remover
+        // verifica se são o produto a remover
         if (strcmp(p.nome, nomeBusca) == 0) {
             encontrou = 1;
-            // não escreve no arquivo temporário ? produto removido
+            // não escreve no arquivo temporÃ¡rio ? produto removido
         } else {
             fprintf(temp, "%s;%s;%.2f;%d;%d\n",
                     p.nome, p.categoria, p.preco, p.quantidade, p.codigo);
@@ -334,8 +322,6 @@ void remover() {
         printf("Produto nao encontrado.\n");
     }
 }
-
-
 
 void atualizar() {
     FILE *f = fopen(ARQUIVO, "r");
