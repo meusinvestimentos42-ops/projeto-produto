@@ -9,7 +9,7 @@ Este projeto prático consiste em um sistema desenvolvido em linguagem C para o 
 1. Higor Aparecido da Silva Santos  
 2. Isabella de Almeida Santos  
 3. Edgard Aparecido  
-4. Lucas Rodrigues de Lima Chaves  
+4. Lucas Rodrigues  
 5. José Bettuz
    
 
