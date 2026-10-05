@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <locale.h> // 1. BIBLIOTECA DE LOCALE ADICIONADA
+
 
 // Nome do arquivo e constantes do sistema
 #define ARQUIVO "acervo_livraria.csv"
@@ -25,6 +27,7 @@ void remover();
 void atualizar();
 
 int main() {
+    setlocale(LC_ALL, "Portuguese"); // 2. ACENTUAÇÃO CONFIGURADA
     int op;
     do {
         system("cls"); // limpa a tela (Windows), Se estiver no Linux/Mac, utilize system("clear")
@@ -63,10 +66,6 @@ int main() {
     return 0;
 }
 
-// ==========================================
-// Implementações das Funções Padronizadas
-// ==========================================
-
 void cadastrar() {
     Produto p;
     FILE *f = fopen(ARQUIVO, "a");
@@ -82,7 +81,6 @@ void cadastrar() {
     printf("Categoria/Genero (ex: Ficcao, Papelaria, Tecnico): ");
     scanf(" %49[^\n]", p.categoria);
 
-    // Validação de preço não negativo
     do {
         printf("Preco: R$ ");
         scanf("%f", &p.preco);
@@ -91,7 +89,6 @@ void cadastrar() {
         }
     } while (p.preco < 0);
 
-    // Validação de quantidade não negativa
     do {
         printf("Quantidade em estoque: ");
         scanf("%d", &p.quantidade);
@@ -103,7 +100,6 @@ void cadastrar() {
     printf("Codigo do produto/ISBN: ");
     scanf("%d", &p.codigo);
 
-    // Grava no arquivo CSV
     fprintf(f, "%s;%s;%.2f;%d;%d\n", p.nome, p.categoria, p.preco, p.quantidade, p.codigo);
     fclose(f);
 
@@ -124,6 +120,9 @@ void listar() {
     printf("\n----- PRODUTOS CADASTRADOS NO ACERVO -----\n");
 
     while (fgets(linha, sizeof(linha), f) != NULL) {
+        linha[strcspn(linha, "\r\n")] = 0; // Limpa quebras de linha
+        if (strlen(linha) == 0) continue;   // Ignora linhas em branco
+
         char *token;
 
         token = strtok(linha, ";");
@@ -138,7 +137,7 @@ void listar() {
         token = strtok(NULL, ";");
         if (token != NULL) p.quantidade = atoi(token);
 
-        token = strtok(NULL, ";\n");
+        token = strtok(NULL, ";");
         if (token != NULL) p.codigo = atoi(token);
 
         contador++;
@@ -173,6 +172,9 @@ void buscarPorNome() {
     scanf(" %99[^\n]", nomeBusca);
 
     while (fgets(linha, sizeof(linha), f) != NULL) {
+        linha[strcspn(linha, "\r\n")] = 0;
+        if (strlen(linha) == 0) continue;
+
         char *token;
 
         token = strtok(linha, ";");
@@ -187,7 +189,7 @@ void buscarPorNome() {
         token = strtok(NULL, ";");
         if (token != NULL) p.quantidade = atoi(token);
 
-        token = strtok(NULL, ";\n");
+        token = strtok(NULL, ";");
         if (token != NULL) p.codigo = atoi(token);
 
         if (strcmp(p.nome, nomeBusca) == 0) {
@@ -227,6 +229,9 @@ void buscarPorCategoria() {
     printf("\n--- PRODUTOS NA CATEGORIA/GENERO: %s ---\n", categoriaBusca);
 
     while (fgets(linha, sizeof(linha), f) != NULL) {
+        linha[strcspn(linha, "\r\n")] = 0;
+        if (strlen(linha) == 0) continue;
+
         char *token;
 
         token = strtok(linha, ";");
@@ -241,7 +246,7 @@ void buscarPorCategoria() {
         token = strtok(NULL, ";");
         if (token != NULL) p.quantidade = atoi(token);
 
-        token = strtok(NULL, ";\n");
+        token = strtok(NULL, ";");
         if (token != NULL) p.codigo = atoi(token);
 
         if (strcmp(p.categoria, categoriaBusca) == 0) {
@@ -285,6 +290,9 @@ void buscarPorPreco() {
     printf("\n--- PRODUTOS NA FAIXA DE R$ %.2f A R$ %.2f ---\n", precoMin, precoMax);
 
     while (fgets(linha, sizeof(linha), f) != NULL) {
+        linha[strcspn(linha, "\r\n")] = 0;
+        if (strlen(linha) == 0) continue;
+
         char *token;
 
         token = strtok(linha, ";");
@@ -299,7 +307,7 @@ void buscarPorPreco() {
         token = strtok(NULL, ";");
         if (token != NULL) p.quantidade = atoi(token);
 
-        token = strtok(NULL, ";\n");
+        token = strtok(NULL, ";");
         if (token != NULL) p.codigo = atoi(token);
 
         if (p.preco >= precoMin && p.preco <= precoMax) {
@@ -341,6 +349,9 @@ void remover() {
     scanf(" %99[^\n]", nomeBusca);
 
     while (fgets(linha, sizeof(linha), f) != NULL) {
+        linha[strcspn(linha, "\r\n")] = 0;
+        if (strlen(linha) == 0) continue;
+
         strcpy(copia, linha);
 
         char *token = strtok(copia, ";");
@@ -349,7 +360,7 @@ void remover() {
         if (strcmp(p.nome, nomeBusca) == 0) {
             encontrou = 1;
         } else {
-            fprintf(temp, "%s", linha);
+            fprintf(temp, "%s\n", linha);
         }
     }
 
@@ -392,6 +403,9 @@ void atualizar() {
     scanf(" %99[^\n]", nomeBusca);
 
     while (fgets(linha, sizeof(linha), f) != NULL) {
+        linha[strcspn(linha, "\r\n")] = 0;
+        if (strlen(linha) == 0) continue;
+
         strcpy(copia, linha);
 
         char *token;
@@ -407,7 +421,7 @@ void atualizar() {
         token = strtok(NULL, ";");
         if (token != NULL) p.quantidade = atoi(token);
 
-        token = strtok(NULL, ";\n");
+        token = strtok(NULL, ";");
         if (token != NULL) p.codigo = atoi(token);
 
         if (strcmp(p.nome, nomeBusca) == 0) {
@@ -441,7 +455,7 @@ void atualizar() {
 
             fprintf(temp, "%s;%s;%.2f;%d;%d\n", p.nome, p.categoria, p.preco, p.quantidade, p.codigo);
         } else {
-            fprintf(temp, "%s", linha);
+            fprintf(temp, "%s\n", linha);
         }
     }
 
