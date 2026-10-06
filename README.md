@@ -60,4 +60,4 @@ Abra o terminal na pasta do projeto e digite o seguinte comando:
 
 Confira a demonstração completa das funcionalidades e a explicação do código no link abaixo:
 
-🎥 **[Link da Apresentação no YouTube](COLE_O_LINK_AQUI)**
+🎥 **[Link da Apresentação no YouTube]((https://youtu.be/wjvluPXmZw8?si=fvtP4D0rZqhkF-8X))**
