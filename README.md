@@ -1,7 +1,7 @@
 # 📚 Sistema de Gestão de Acervo - Livraria & Papelaria
 
 **Descrição:**  
-Este projeto prático consiste em um sistema desenvolvido em linguagem C para a gestão e controle de estoque do acervo de uma livraria (incluindo livros de diversos gêneros, artigos de papelaria e produtos culturais). 
+Este projeto prático consiste em um sistema desenvolvido em linguagem C para a gestão e controle de estoque do acervo de vendas de uma livraria (incluindo livros de diversos gêneros, artigos de papelaria e produtos culturais). 
 
 O programa utiliza conceitos de estruturas de dados (`struct`), manipulação de arquivos CSV (`.csv`), modularização através de funções e tratamento robusto de validações de entrada para evitar falhas de execução. O sistema garante a persistência dos dados no arquivo `acervo_livraria.csv`, mantendo o histórico de produtos mesmo após o encerramento da execução.
 
